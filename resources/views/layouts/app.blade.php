@@ -1,8 +1,8 @@
 <html>
 	<head>
-		<link href="/styles/app.css" rel="stylesheet">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+		<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+		<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 		<title>@yield('title')</title>
 	</head>
 	<body>
@@ -25,13 +25,10 @@
 			</nav>
 		</header>
 		<div class="container">
-			
 			@yield('content')
 		</div>
 		<footer>
 			<p><center></center></p>
-			
 		</footer>
 	</body>
-
 </html>
