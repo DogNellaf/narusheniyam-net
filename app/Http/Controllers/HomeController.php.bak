@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Models\Violation;
+
+use Illuminate\Support\Facades\Auth;
+
+class HomeController extends Controller
+{
+	private const RECEPIE_VALIDATOR = [
+		'description' => 'required',
+		'number' => 'required|max:10|min:9',
+		'status' => 'required|max:13|min:5'
+	];
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+	public function edit(Violation $violation) {
+		return view('violation-edit', ['violation' => $violation]);
+	}
+	
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	public function store(Request $request) {
+		Auth::user()->violations()->create([
+			  'description' => $request->description,
+			  'number' => $request->number,
+			  'status' => "Новое"]);
+		return redirect()->route('home');
+	}
+	
+	public function update(Request $request, Violation $violation) {
+		$validated = $request->validate(self::VIOLATION_VALIDATOR);
+		$violation->fill(['description' => $validated['description'],
+					'number' => $validated['number'],
+					'status' => $validated['status']]);
+		$violation->save();
+		return redirect()->route('home');
+	}
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    /*public function index()
+    {
+        return view('home');
+    }*/
+	public function create() {
+		return view('violation-create');
+	}
+	public function index() {
+		return view('home', ['violations' => Auth::user()->violations()->latest()->get()]);
+    }
+}

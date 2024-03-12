@@ -1,0 +1,27 @@
+@extends('layouts.app')
+@section('title', 'Главная')
+@section('content')
+	<h1>Заявления</h1>
+	<table class="table table-striped table-borderless">
+	<thead>
+		<tr>
+			<th>Описание</th>
+			<th>Номер</th>
+			<th>Статус</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach ($violations as $violation)
+		<tr>
+			<td><h4>{{$violation->description}}</h4></td>
+			<td>{{$violation->number}}</td>
+			<td>{{$violation->status}}</td>
+			<td>
+				<a href="{{ route('detail', ['violation' => $violation]) }}">Подробнее...</a>
+			</td>
+		</tr>
+		@endforeach
+	</tbody>
+</table>
+@endsection('content')
