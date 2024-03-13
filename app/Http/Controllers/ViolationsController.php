@@ -15,7 +15,7 @@ class ViolationsController extends Controller
 	];
 
 	public function detail(Violation $violation) {
-		return view('violations/detail', compact('violation')]);
+		return view('violations/detail', compact('violation'));
 	}
 
 	public function edit(Violation $violation) {

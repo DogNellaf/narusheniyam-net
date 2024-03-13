@@ -59,11 +59,11 @@
 						</div>
 						@if (Auth::user()->is_admin)
 							<div class="col-3">
-								<a class="btn btn-info text-light" href="{{ route('violation.edit', ['violation' -> $violation]) }}">Редактировать</a>
+								<a class="btn btn-info text-light" href="{{ route('violation.edit', ['violation' => $violation]) }}">Редактировать</a>
 							</div>
 						@else
 							<div class="col-3">
-								<a class="btn btn-info text-light" href="{{ route('violation.detail', ['violation' -> $violation]) }}">Подробнее</a>
+								<a class="btn btn-info text-light" href="{{ route('violation.detail', ['violation' => $violation]) }}">Подробнее</a>
 							</div>						
 						@endif
 					</div>
