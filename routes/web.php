@@ -20,16 +20,16 @@ Auth::routes();
 
 // Dashboard routes
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Violation routes
 
-Route::get('/home/create', [HomeController::class, 'create'])->name('violation.create');
-Route::post('/home/create', [HomeController::class, 'store'])->name('violation.store');
+Route::get('/home/create', [ViolationsController::class, 'create'])->name('violation.create');
+Route::post('/home/create', [ViolationsController::class, 'store'])->name('violation.store');
 
-Route::get('/home/{violation}', [HomeController::class, 'edit'])->name('violation.edit');
-Route::patch('/home/{violation}', [HomeController::class, 'update'])->name('violation.update');
-Route::delete('/home/{violation}', [HomeController::class, 'destroy'])->name('violation.destroy');
+Route::get('/home/{violation}', [ViolationsController::class, 'edit'])->name('violation.edit');
+Route::patch('/home/{violation}', [ViolationsController::class, 'update'])->name('violation.update');
+Route::delete('/home/{violation}', [ViolationsController::class, 'destroy'])->name('violation.destroy');
 
 Route::get('/{violation}', [ViolationsController::class, 'detail'])->name('violation.detail');
 

@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Models\Violation;
-
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -14,14 +10,14 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-	
+
 	public function index() {
 		$violations = Auth::user()->violations()->latest()->get();
 		return view('dashboard/index', compact('violations'));
     }
 
-	public function user_data() {
+	public function user_info() {
 		$user = Auth::user();
-		return view('dashboard/index', compact('user'));
+		return view('dashboard/user-info', compact('user'));
     }
 }

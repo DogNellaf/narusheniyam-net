@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Violation;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ViolationsController extends Controller
 {
