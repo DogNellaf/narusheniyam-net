@@ -14,6 +14,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+	
 	public function index() {
 		$violations = Auth::user()->violations()->latest()->get();
 		return view('dashboard/index', compact('violations'));

@@ -9,22 +9,23 @@ use Illuminate\Support\Facades\Auth;
 class ViolationsController extends Controller
 {
 	private const VIOLATION_VALIDATOR = [
-		'description' => 'required',
-		'number' => 'required|max:10|min:9',
-		'status' => 'required|max:13|min:5'
+		'description' => ['required'],
+		'number' => ['required', 'max:10', 'min:9'],
+		'status' => ['required', 'max:13', 'min:5']
 	];
 
 	public function detail(Violation $violation) {
-		return view('detail', ['violation' => $violation]);
+		return view('violations/detail', compact('violation')]);
 	}
 
 	public function edit(Violation $violation) {
-		return view('violations/edit', ['violation' => $violation]);
+		return view('violations/edit', compact('violation'));
 	}
 
 	public function update(Request $request, Violation $violation) {
 		$validated = $request->validate(self::VIOLATION_VALIDATOR);
-		$violation->fill(['description' => $validated['description'],
+		$violation->fill([
+					'description' => $validated['description'],
 					'number' => $validated['number'],
 					'status' => $validated['status']]);
 		$violation->save();
@@ -41,5 +42,4 @@ class ViolationsController extends Controller
 			  'status' => "Новое"]);
 		return redirect()->route('home');
 	}
-
 }
