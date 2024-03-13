@@ -1,18 +1,10 @@
 /* Main style */
 
-a .white-color {
-    color: white !important;  
-}
-
 footer p {
     text-align: center;
 }
 
 /* User dashboard */
-
-div.dashboard div.buttons {
-    margin-bottom: 5vh;
-}
 
 /* .violation-create {
     margin-top: 5vh;

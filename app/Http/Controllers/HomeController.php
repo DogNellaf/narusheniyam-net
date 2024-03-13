@@ -10,54 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-	private const VIOLATION_VALIDATOR = [
-		'description' => 'required',
-		'number' => 'required|max:10|min:9',
-		'status' => 'required|max:13|min:5'
-	];
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-	public function edit(Violation $violation) {
-		return view('violation-edit', ['violation' => $violation]);
-	}
-	
     public function __construct()
     {
         $this->middleware('auth');
     }
-	public function store(Request $request) {
-		Auth::user()->violations()->create([
-			  'description' => $request->description,
-			  'number' => $request->number,
-			  'status' => "Новое"]);
-		return redirect()->route('home');
-	}
-	
-	public function update(Request $request, Violation $violation) {
-		$validated = $request->validate(self::VIOLATION_VALIDATOR);
-		$violation->fill(['description' => $validated['description'],
-					'number' => $validated['number'],
-					'status' => $validated['status']]);
-		$violation->save();
-		return redirect()->route('home');
-	}
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    /*public function index()
-    {
-        return view('home');
-    }*/
-	public function create() {
-		return view('violation-create');
-	}
 	public function index() {
-		return view('home', ['violations' => Auth::user()->violations()->latest()->get()]);
+		$violations = Auth::user()->violations()->latest()->get();
+		return view('dashboard/index', compact('violations'));
+    }
+
+	public function user_data() {
+		$user = Auth::user();
+		return view('dashboard/index', compact('user'));
     }
 }
