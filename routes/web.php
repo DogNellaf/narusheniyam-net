@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ViolationsController;
 
@@ -13,8 +13,8 @@ Route::get('/', [MainController::class, 'index'])->name('index');
 
 // Auth routes
 
-Route::get('login', [LoginController::class, 'index'])->name('login-page');
-Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::get('login', [CustomLoginController::class, 'index'])->name('login-page');
+Route::post('login', [CustomLoginController::class, 'login'])->name('login');
 
 Auth::routes();
 

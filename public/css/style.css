@@ -31,3 +31,7 @@
     margin-top: 5vh;
     margin-left: 70vw;
 } */
+
+.dashboard .violation p {
+    line-height: 37px;
+}
