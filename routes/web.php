@@ -21,6 +21,8 @@ Auth::routes();
 // Dashboard routes
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/user', [HomeController::class, 'user_info'])->name('user.info');
+Route::patch('/home/user', [HomeController::class, 'user_save'])->name('user.info.save');
 
 // Violation routes
 

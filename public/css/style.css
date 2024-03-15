@@ -1,7 +1,28 @@
 /* Main style */
 
-footer p {
+.content {
+    margin-top: 10vh;
+}
+
+.footer {
+    position: relative;
+    bottom: -10;
+    width: 100vw;
+}
+
+.footer p {
     text-align: center;
+}
+
+/* Index page */
+
+/* .index {
+    line-height: 40px;
+} */
+
+.index img {
+    width: 60vw;
+    margin-left: 15vw;
 }
 
 /* User dashboard */

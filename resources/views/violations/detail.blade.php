@@ -11,7 +11,7 @@
 					<p class="card-text">Номер автомобиля: {{$violation->number}}</p>
 					<p class="card-text">Описание: {{$violation->description}}</p>
 					<p class="card-text">Статус: {{$violation->status}}</p>
-					<p class="card-text">Автор: {{ $violation->user->name }}</p>
+					<p class="card-text">Автор: {{ $violation->user->lastname }} {{ $violation->user->firstname }} {{ $violation->user->id }}</p>
 				</div>
 				<div class="card-footer text-muted">
 					Создано {{$violation->created_at}}

@@ -8,7 +8,7 @@
 		@else
 			<div class="row buttons"> 
 				<div class="col-4">
-					<a class="btn btn-info text-light" href="">Изменить персональные данные</a>
+					<a class="btn btn-info text-light" href="{{ route('user.info') }}">Изменить персональные данные</a>
 				</div>
 				<div class="col-4"></div>
 				<div class="col-4">
