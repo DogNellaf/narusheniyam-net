@@ -10,7 +10,7 @@ class ViolationsController extends Controller
 {
 	private const VIOLATION_VALIDATOR = [
 		'description' => ['required'],
-		'number' => ['required', 'max:10', 'min:9'],
+		'number' => ['required', 'max:10', 'min:8'],
 		'status' => ['required', 'max:13', 'min:5']
 	];
 
