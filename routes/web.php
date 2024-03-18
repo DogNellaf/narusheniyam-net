@@ -1,9 +1,12 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
+
 use App\Http\Controllers\Auth\CustomLoginController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ViolationsController;
 
@@ -13,8 +16,13 @@ Route::get('/', [MainController::class, 'index'])->name('index');
 
 // Auth routes
 
-Route::get('login', [CustomLoginController::class, 'index'])->name('login-page');
-Route::post('login', [CustomLoginController::class, 'login'])->name('login');
+// Route::get('login', [CustomLoginController::class, 'index'])->name('login-page');
+// Route::post('login', [CustomLoginController::class, 'login'])->name('login-action');
+
+// Route::get('register', [RegisterController::class, 'index'])->name('register-page');
+// Route::post('register', [RegisterController::class, 'login'])->name('register');
+
+// Route::post('login', [CustomLoginController::class, 'logout'])->name('logout');
 
 Auth::routes();
 
