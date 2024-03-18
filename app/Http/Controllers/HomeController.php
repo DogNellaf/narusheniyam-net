@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Violation;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,13 @@ class HomeController extends Controller
     }
 
 	public function index() {
-		$violations = Auth::user()->violations()->latest()->get();
+		$user = Auth::user();
+		if ($user->is_admin) {
+			$violations = Violation::latest()->get();
+		} else {
+			$violations = $user->violations()->latest()->get();
+		}
+		
 		return view('dashboard/index', compact('violations'));
     }
 
