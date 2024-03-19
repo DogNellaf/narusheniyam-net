@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /home/
+
+User-agent: *
+Disallow: /login/
+
+User-agent: *
+Disallow: /register/
+
+Sitemap: http://u2549804.isp.regruhosting.ru/sitemap.xml

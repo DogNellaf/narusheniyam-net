@@ -4,6 +4,8 @@
 		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 		<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 		<title>@yield('title')</title>
+		<meta name="description" content="Жалуйтесь на нарушения ПДД на официальном информационном портале ГИБДД Нарушениям.Нет. Ваше обращение будет быстро рассмотрено и принято в работу компетентными сотрудниками дорожно-постовой службы."/>
+		<meta name="keywords" content="ПДД,нарушения,жалоба,ГИБДД,парковка,авария" />
 	</head>
 	<body class="container-fluid">
 			<div class="row header">
