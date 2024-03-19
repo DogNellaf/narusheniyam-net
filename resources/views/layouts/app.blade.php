@@ -6,6 +6,7 @@
 		<title>@yield('title')</title>
 		<meta name="description" content="Жалуйтесь на нарушения ПДД на официальном информационном портале ГИБДД Нарушениям.Нет. Ваше обращение будет быстро рассмотрено и принято в работу компетентными сотрудниками дорожно-постовой службы."/>
 		<meta name="keywords" content="ПДД,нарушения,жалоба,ГИБДД,парковка,авария" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">.
 	</head>
 	<body class="container-fluid">
 			<div class="row header">
