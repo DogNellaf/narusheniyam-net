@@ -1,4 +1,4 @@
-# Narusheniyam.Net — Traffic Violation Reporting Portal
+# Narusheniyam.Net
 
 > [Русская версия](README.ru.md)
 
