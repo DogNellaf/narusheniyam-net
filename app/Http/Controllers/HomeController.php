@@ -2,62 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Models\Violation;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Violation;
 
 class HomeController extends Controller
 {
-	private const VIOLATION_VALIDATOR = [
-		'description' => 'required',
-		'number' => 'required|max:10|min:9',
-		'status' => 'required|max:13|min:5'
-	];
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-	public function edit(Violation $violation) {
-		return view('violation-edit', ['violation' => $violation]);
-	}
-	
     public function __construct()
     {
         $this->middleware('auth');
     }
-	public function store(Request $request) {
-		Auth::user()->violations()->create([
-			  'description' => $request->description,
-			  'number' => $request->number,
-			  'status' => "Новое"]);
-		return redirect()->route('home');
-	}
-	
-	public function update(Request $request, Violation $violation) {
-		$validated = $request->validate(self::VIOLATION_VALIDATOR);
-		$violation->fill(['description' => $validated['description'],
-					'number' => $validated['number'],
-					'status' => $validated['status']]);
-		$violation->save();
-		return redirect()->route('home');
-	}
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    /*public function index()
+    public function index()
     {
-        return view('home');
-    }*/
-	public function create() {
-		return view('violation-create');
-	}
-	public function index() {
-		return view('home', ['violations' => Auth::user()->violations()->latest()->get()]);
+        $user = Auth::user();
+
+        $violations = $user->isAdmin()
+            ? Violation::latest()->paginate(20)
+            : $user->violations()->latest()->paginate(20);
+
+        return view('dashboard.index', compact('violations'));
+    }
+
+    public function user_info()
+    {
+        $user = Auth::user();
+
+        return view('dashboard.user-info', compact('user'));
+    }
+
+    public function user_save(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'name'         => ['required', 'string', 'max:255'],
+            'email'        => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'phone_number' => ['required', 'string', 'max:20'],
+            'firstname'    => ['required', 'string', 'max:255'],
+            'middlename'   => ['nullable', 'string', 'max:255'],
+            'lastname'     => ['required', 'string', 'max:255'],
+            'password'     => ['nullable', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user->fill([
+            'name'         => $validated['name'],
+            'email'        => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'firstname'    => $validated['firstname'],
+            'middlename'   => $validated['middlename'] ?? '',
+            'lastname'     => $validated['lastname'],
+        ]);
+
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('user.info')->with('success', 'Данные успешно сохранены.');
     }
 }

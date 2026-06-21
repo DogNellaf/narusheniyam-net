@@ -1,27 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Главная')
+@section('title', 'Нарушений.Нет')
 @section('content')
-	<h1>Заявления</h1>
-	<table class="table table-striped table-borderless">
-	<thead>
-		<tr>
-			<th>Описание</th>
-			<th>Номер</th>
-			<th>Статус</th>
-			<th>&nbsp;</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach ($violations as $violation)
-		<tr>
-			<td><h4>{{$violation->description}}</h4></td>
-			<td>{{$violation->number}}</td>
-			<td>{{$violation->status}}</td>
-			<td>
-				<a href="{{ route('detail', ['violation' => $violation]) }}">Подробнее...</a>
-			</td>
-		</tr>
-		@endforeach
-	</tbody>
-</table>
+    <div class="row index">
+        <div class="col">
+            <h1>Нарушениям.Нет</h1>
+            <p>Сервис "Нарушениям Нет" предназначен для фиксации нарушений ПДД среди участников дорожного движения.</p>
+            <p>Вы можете сообщить о нарушении, указав номер машины и описание произошедшего.</p>
+            <img width="900" height="600" alt="Пример нарушения" src="{{ asset('images/index.webp') }}"/>
+        </div>
+    </div>
 @endsection('content')
