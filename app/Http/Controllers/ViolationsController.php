@@ -8,38 +8,60 @@ use Illuminate\Http\Request;
 
 class ViolationsController extends Controller
 {
-	private const VIOLATION_VALIDATOR = [
-		'description' => ['required'],
-		'number' => ['required', 'max:10', 'min:8'],
-		'status' => ['required', 'max:13', 'min:5']
-	];
+    private const STATUS_RULES = ['required', 'string', 'in:Новое,Подтверждено,Отклонено'];
 
-	public function detail(Violation $violation) {
-		return view('violations/detail', compact('violation'));
-	}
+    private const STORE_RULES = [
+        'description' => ['required', 'string', 'max:2000'],
+        'number'      => ['required', 'string', 'min:6', 'max:10'],
+    ];
 
-	public function edit(Violation $violation) {
-		return view('violations/edit', compact('violation'));
-	}
+    private const UPDATE_RULES = [
+        'description' => ['required', 'string', 'max:2000'],
+        'number'      => ['required', 'string', 'min:6', 'max:10'],
+        'status'      => ['required', 'string', 'in:Новое,Подтверждено,Отклонено'],
+    ];
 
-	public function update(Request $request, Violation $violation) {
-		$validated = $request->validate(self::VIOLATION_VALIDATOR);
-		$violation->fill([
-					'description' => $validated['description'],
-					'number' => $validated['number'],
-					'status' => $validated['status']]);
-		$violation->save();
-		return redirect()->route('home');
-	}
-	public function create() {
-		return view('violations/create');
-	}
+    public function detail(Violation $violation)
+    {
+        return view('violations.detail', compact('violation'));
+    }
 
-	public function store(Request $request) {
-		Auth::user()->violations()->create([
-			  'description' => $request->description,
-			  'number' => $request->number,
-			  'status' => "Новое"]);
-		return redirect()->route('home');
-	}
+    public function create()
+    {
+        return view('violations.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate(self::STORE_RULES);
+
+        Auth::user()->violations()->create([
+            'description' => $validated['description'],
+            'number'      => $validated['number'],
+            'status'      => Violation::STATUS_NEW,
+        ]);
+
+        return redirect()->route('home')->with('success', 'Заявление успешно добавлено.');
+    }
+
+    public function edit(Violation $violation)
+    {
+        return view('violations.edit', compact('violation'));
+    }
+
+    public function update(Request $request, Violation $violation)
+    {
+        $validated = $request->validate(self::UPDATE_RULES);
+
+        $violation->update($validated);
+
+        return redirect()->route('home')->with('success', 'Заявление обновлено.');
+    }
+
+    public function destroy(Violation $violation)
+    {
+        $violation->delete();
+
+        return redirect()->route('home')->with('success', 'Заявление удалено.');
+    }
 }
