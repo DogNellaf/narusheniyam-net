@@ -1,10 +1,8 @@
 # Narusheniyam.Net
 
-> [Русская версия](README.ru.md)
+> 🇬🇧 English | [🇷🇺 Русский](README.ru.md)
 
 A web application for reporting road traffic violations. Users can submit reports with a vehicle registration number and a description of the incident. Moderators review each submission and update its status.
-
----
 
 ## Features
 
@@ -15,8 +13,6 @@ A web application for reporting road traffic violations. Users can submit report
 - Flash notifications for successful operations
 - Paginated violation lists
 - Responsive Bootstrap 5 interface
-
----
 
 ## Tech Stack
 
@@ -29,8 +25,6 @@ A web application for reporting road traffic violations. Users can submit report
 | Auth | Laravel built-in (session-based) |
 | Testing | PHPUnit 10 |
 
----
-
 ## Requirements
 
 - PHP >= 8.1
@@ -38,38 +32,33 @@ A web application for reporting road traffic violations. Users can submit report
 - Node.js >= 18 & npm
 - MySQL >= 8.0
 
----
-
 ## Installation
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone <repository-url>
 cd No_violation
 
-# 2. Install PHP dependencies
+# Install PHP dependencies
 composer install
 
-# 3. Install Node dependencies and build assets
+# Install Node dependencies and build assets
 npm install && npm run build
 
-# 4. Configure environment
+# Configure environment
 cp .env.example .env
 php artisan key:generate
 
-# 5. Set up the database
-# Edit .env — fill in DB_DATABASE, DB_USERNAME, DB_PASSWORD
+# Set up the database (edit .env first — fill in DB_DATABASE, DB_USERNAME, DB_PASSWORD)
 php artisan migrate
 
-# 6. Start the development server
+# Run the development server
 php artisan serve
 ```
 
-Open [http://localhost:8000](http://localhost:8000) in your browser.
+The application will be available at `http://localhost:8000`.
 
----
-
-## Configuration
+## Environment Variables
 
 Key variables in `.env`:
 
@@ -80,8 +69,6 @@ Key variables in `.env`:
 | `DB_USERNAME` | Database username |
 | `DB_PASSWORD` | Database password |
 | `MAIL_*` | Mail settings (for password reset) |
-
----
 
 ## Creating an Admin User
 
@@ -98,8 +85,6 @@ php artisan tinker
 >>> \App\Models\User::where('email', 'admin@example.com')->update(['is_admin' => true]);
 ```
 
----
-
 ## Violation Statuses
 
 | Status | Meaning |
@@ -108,12 +93,11 @@ php artisan tinker
 | Подтверждено | Confirmed by a moderator |
 | Отклонено | Rejected by a moderator |
 
----
-
 ## Running Tests
 
+Configure a test database in `phpunit.xml`, or use in-memory SQLite, then run:
+
 ```bash
-# Configure a test database in phpunit.xml or use :memory: SQLite
 php artisan test
 ```
 
@@ -123,8 +107,6 @@ To run a specific suite:
 php artisan test --testsuite=Unit
 php artisan test --testsuite=Feature
 ```
-
----
 
 ## Project Structure
 
@@ -150,8 +132,6 @@ tests/
   Unit/                   # UserTest, ViolationTest
 ```
 
----
-
 ## License
 
-This project is licensed under the MIT License.
+[MIT](LICENSE)
